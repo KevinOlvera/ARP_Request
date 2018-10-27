@@ -1,0 +1,1 @@
+Este programa envia una solicitud ARP a una IP preseleccionada y recibe la trama de respuesta si en la red esta IP esta ocupada.
