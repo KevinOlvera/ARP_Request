@@ -135,7 +135,7 @@ int getData(int sd)
 void ARPframe(unsigned char *trama, unsigned char *s_MAC, unsigned char *s_IP, unsigned char *d_MAC, unsigned char *d_IP)
 {
 	memcpy(trama+0, bro_MAC, 6);
-	memcpy(trama+6, d_MAC, 6);
+	memcpy(trama+6, my_MAC, 6);
 	memcpy(trama+12, ethertype_ARP, 2);
 	memcpy(trama+14, HW, 2);
 	memcpy(trama+16, PR, 2);
