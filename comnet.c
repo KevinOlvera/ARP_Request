@@ -6,7 +6,7 @@ int getData(int sd)
 	int index, i;
 	char select, interface_name[10];
 
-	printf("Elije la interfaz de red a utilizar\n 1.-enp2s0\n 2.-wlp3s0\n 3.-Salir\n ->");
+	printf("Elije la interfaz de red a utilizar\n 1.-enp2s0\n 2.-wlp3s0\n 3.-Salir\n -> ");
 	scanf("%c", &select);
 
 	switch (select)
