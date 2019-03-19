@@ -197,8 +197,15 @@ void printFrame(unsigned char *frame, int size)
 void printARPinfo(unsigned char *frame, int size)
 {
 	int i;
+	
+	if(!memcmp(frame+20, epcode_ARP_request, 2))
+		printf("Solicitud ARP\n");
+	else if(!memcmp(frame+20, epcode_ARP_replay, 2))
+		printf("Respuesta ARP\n\n");
+	
+	printf("+---------------------------------------+\n");
 
-	printf("\nDireccion MAC: ");
+	printf("Direccion MAC Origen: ");
 
 	for( i = 22 ; i < 28 ; i++ )
 	{
@@ -208,7 +215,7 @@ void printARPinfo(unsigned char *frame, int size)
 			printf("%.2X:", frame[i]);
 	}
 
-	printf("Direccion IP: ");
+	printf("Direccion IP Origen: ");
 
 	for( i = 28 ; i < 32 ; i++ )
 	{
@@ -217,6 +224,28 @@ void printARPinfo(unsigned char *frame, int size)
 		else 
 			printf("%d.", frame[i]);
 	}
+
+	printf("Direccion MAC Destino: ");
+
+	for( i = 32 ; i < 38 ; i++ )
+	{
+		if(i == 37)
+			printf("%.2X\n", frame[i]);
+		else
+			printf("%.2X:", frame[i]);
+	}
+
+	printf("Direccion IP Destino: ");
+
+	for( i = 38 ; i < 42 ; i++ )
+	{
+		if( i == 41 )
+			printf("%d\n", frame[i]);
+		else 
+			printf("%d.", frame[i]);
+	}
+
+	printf("+---------------------------------------+\n");
 }
 
 void receiveFrame(int sd, unsigned char *frame)
@@ -238,7 +267,7 @@ void receiveFrame(int sd, unsigned char *frame)
 		{
 			if( !memcmp(frame+0, my_MAC, 6) && !memcmp(frame+12, ethertype_ARP, 2) && !memcmp(frame+20, epcode_ARP_replay, 2) && !memcmp(frame+28, dest_IP, 4) )
 			{
-				printFrame(frame, size);
+				//printFrame(frame, size);
 				printARPinfo(frame, size);
 				flag = 1;
 			}

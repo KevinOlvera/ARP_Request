@@ -21,7 +21,7 @@ int main(int argc, char const *argv[])
 		memcpy(dest_IP, IP, 4);
 		
 		ARPframe(frame_s, my_MAC, my_IP, dest_MAC, dest_IP);
-		printFrame(frame_s, 42);
+		//printFrame(frame_s, 42);
 		sendFrame(packet_socket, index, frame_s, 42);
 		receiveFrame(packet_socket, frame_r);
     }
